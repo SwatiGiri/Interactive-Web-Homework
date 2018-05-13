@@ -2,10 +2,17 @@
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
 var $searchBtn = document.querySelector("#search");
+var $searchBtn2 = document.querySelector("#search2");
+var $searchBtn3 = document.querySelector("#search3");
+var $searchBtn4 = document.querySelector("#search4");
+var $searchBtn5 = document.querySelector("#search5");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
-$searchBtn.addEventListener("click", handleSearchButtonClick);
+// $searchBtn2.addEventListener("click", handleSearchButtonClick2);
+$searchBtn3.addEventListener("click", handleSearchButtonClick3);
+// $searchBtn4.addEventListener("click", handleSearchButtonClick4);
+// $searchBtn5.addEventListener("click", handleSearchButtonClick5);
 // Set filteredAddresses to addressData initially
 var filterdata = dataSet;
 
@@ -30,11 +37,11 @@ function renderTable() {
 function handleSearchButtonClick() {
   // Format the user's search by removing leading and trailing whitespace, lowercase the string
   var filterDate = $dateInput.value;
-
+  
   // Set filteredAddresses to an array of all addresses whose "state" matches the filter
   filterdata = dataSet.filter(function(address) {
     var addressdatetime = address.datetime;
-
+    
     // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
     return addressdatetime === filterDate;
   });
@@ -42,4 +49,23 @@ function handleSearchButtonClick() {
 }
 
 // Render the table for the first time on page load
+// renderTable();
+
+
+function handleSearchButtonClick3() {
+  // Format the user's search by removing leading and trailing whitespace, lowercase the string
+  var filterState = $stateInput.value.trim().toLowerCase();
+
+  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  filterdata = dataSet.filter(function(address) {
+    var addressState = address.state.toLowerCase();
+
+    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    return addressState === filterState;
+  });
+  renderTable();
+}
+
+// Render the table for the first time on page load
 renderTable();
+
