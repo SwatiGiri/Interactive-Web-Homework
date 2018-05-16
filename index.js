@@ -1,6 +1,10 @@
 // Get references to the tbody element, input field and button
 var $tbody = document.querySelector("tbody");
 var $dateInput = document.querySelector("#datetime");
+var $stateInput = document.querySelector("#state");
+var $cityInput = document.querySelector("#city");
+var $countryInput = document.querySelector("#country");
+var $shapeInput = document.querySelector("#shape");
 var $searchBtn = document.querySelector("#search");
 var $searchBtn2 = document.querySelector("#search2");
 var $searchBtn3 = document.querySelector("#search3");
@@ -9,10 +13,10 @@ var $searchBtn5 = document.querySelector("#search5");
 
 // Add an event listener to the searchButton, call handleSearchButtonClick when clicked
 $searchBtn.addEventListener("click", handleSearchButtonClick);
-// $searchBtn2.addEventListener("click", handleSearchButtonClick2);
+$searchBtn2.addEventListener("click", handleSearchButtonClick2);
 $searchBtn3.addEventListener("click", handleSearchButtonClick3);
-// $searchBtn4.addEventListener("click", handleSearchButtonClick4);
-// $searchBtn5.addEventListener("click", handleSearchButtonClick5);
+$searchBtn4.addEventListener("click", handleSearchButtonClick4);
+$searchBtn5.addEventListener("click", handleSearchButtonClick5);
 // Set filteredAddresses to addressData initially
 var filterdata = dataSet;
 
@@ -65,6 +69,47 @@ function handleSearchButtonClick3() {
   });
   renderTable();
 }
+function handleSearchButtonClick2() {
+  // Format the user's search by removing leading and trailing whitespace, lowercase the string
+  var filtercity = $cityInput.value.trim().toLowerCase();
+
+  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  filterdata = dataSet.filter(function(address) {
+    var addresscity = address.city.toLowerCase();
+
+    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    return addresscity === filtercity;
+  });
+  renderTable();
+}
+function handleSearchButtonClick4() {
+  // Format the user's search by removing leading and trailing whitespace, lowercase the string
+  var filtercountry = $countryInput.value.trim().toLowerCase();
+
+  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  filterdata = dataSet.filter(function(address) {
+    var addresscountry = address.country.toLowerCase();
+
+    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    return addresscountry === filtercountry;
+  });
+  renderTable();
+}
+function handleSearchButtonClick5() {
+  // Format the user's search by removing leading and trailing whitespace, lowercase the string
+  var filtershape = $shapeInput.value.trim().toLowerCase();
+
+  // Set filteredAddresses to an array of all addresses whose "state" matches the filter
+  filterdata = dataSet.filter(function(address) {
+    var addressshape = address.shape.toLowerCase();
+
+    // If true, add the address to the filteredAddresses, otherwise don't add it to filteredAddresses
+    return addressshape === filtershape;
+  });
+  renderTable();
+}
+
+
 
 // Render the table for the first time on page load
 renderTable();
